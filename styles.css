@@ -443,6 +443,7 @@ main {
   background: radial-gradient(circle at 20% 20%, rgba(212, 166, 81, 0.15), transparent 45%);
   opacity: 0;
   transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .card h3 {
@@ -464,6 +465,8 @@ main {
   margin-top: 12px;
   padding: 10px 16px;
   font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
 }
 
 .card:hover {
