@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ORΔK — Portfólio de Jhon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="bg-particles"></canvas>
+  <div class="animated-background">
+    <span class="ab-shape ab-triangle t1"></span>
+    <span class="ab-shape ab-triangle t2"></span>
+    <span class="ab-shape ab-circle c1"></span>
+    <span class="ab-shape ab-circle c2"></span>
+    <span class="ab-shape ab-line l1"></span>
+    <span class="ab-shape ab-line l2"></span>
+    <span class="ab-shape ab-spark s1"></span>
+    <span class="ab-shape ab-spark s2"></span>
+    <span class="ab-shape ab-triangle t3"></span>
+  </div>
+  <div class="bg-grid"></div>
+  <div class="floating-shapes">
+    <span class="shape triangle"></span>
+    <span class="shape line line-1"></span>
+    <span class="shape line line-2"></span>
+    <span class="shape star"></span>
+  </div>
+
+  <header class="navbar">
+    <div class="brand">ORΔK</div>
+    <nav class="nav-links">
+      <a href="#projetos">Projetos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-logo-wrap">
+        <img src="logo.png" alt="Logotipo ORΔK" class="hero-logo">
+      </div>
+      <h1>JHON</h1>
+      <p class="subtitle">Designer · Web Designer · 3D Artist · Developer</p>
+      <p class="phrase">"Crio experiências, interfaces e universos."</p>
+      <a class="btn primary" href="#projetos">Ver Trabalhos</a>
+    </section>
+
+    <section class="section projects" id="projetos">
+      <div class="section-header">
+        <span class="section-kicker">Seleção</span>
+        <h2>Projetos</h2>
+      </div>
+      <div class="projects-grid">
+        <article class="card">
+          <h3>Website Moderno</h3>
+          <p>Interface responsiva com microinterações e ritmo tipográfico preciso.</p>
+        </article>
+        <article class="card">
+          <h3>Dashboard Financeiro</h3>
+          <p>Visualização clara de dados, fluxos e alertas para decisões rápidas.</p>
+        </article>
+        <article class="card">
+          <h3>Identidade Visual ORΔK</h3>
+          <p>Sistema geométrico com símbolos e materiais metálicos para a marca.</p>
+        </article>
+        <article class="card">
+          <h3>Modelos 3D &amp; Texturas</h3>
+          <p>Biblioteca autoral com materiais, iluminação e atmosfera futurista.</p>
+        </article>
+        <article class="card">
+          <h3>Mini Game / Engine</h3>
+          <p>Prototipagem rápida de mecânicas, UI imersiva e experiências lúdicas.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section about" id="sobre">
+      <div class="section-header">
+        <span class="section-kicker">Manifesto</span>
+        <h2>Sobre</h2>
+      </div>
+      <p class="about-text">
+        Sou Jhon, criativo multidisciplinar que combina design, tecnologia, 3D e desenvolvimento para transformar visões em mundos reais. A marca ORΔK representa minha essência criadora: unir estética, espiritualidade e funcionalidade em experiências únicas.
+      </p>
+    </section>
+
+    <section class="section contact" id="contato">
+      <div class="section-header">
+        <span class="section-kicker">Converse</span>
+        <h2>Contato</h2>
+      </div>
+      <div class="contact-grid">
+        <a class="contact-card" href="mailto:contato@orak.studio">
+          <span class="icon mail-icon"></span>
+          <div>
+            <p class="contact-label">Email</p>
+            <p class="contact-value">contato@orak.studio</p>
+          </div>
+        </a>
+        <a class="contact-card contact-button" href="https://wa.me/5511999999999" target="_blank" rel="noreferrer">
+          <span class="icon wa-icon"></span>
+          <div>
+            <p class="contact-label">WhatsApp</p>
+            <p class="contact-value">Chamar no WhatsApp</p>
+          </div>
+        </a>
+        <a class="contact-card" href="https://www.instagram.com/orak" target="_blank" rel="noreferrer">
+          <span class="icon ig-icon"></span>
+          <div>
+            <p class="contact-label">Instagram</p>
+            <p class="contact-value">@orak</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-line"></div>
+    <p>© 2025 ORΔK — Criado por Jhon</p>
+  </footer>
+  <script src="particles.js"></script>
+</body>
+</html>
