@@ -460,6 +460,12 @@ main {
   z-index: 1;
 }
 
+.card .card-btn {
+  margin-top: 12px;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+}
+
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 16px 38px -18px var(--shadow-strong), 0 0 24px -12px var(--shadow);
