@@ -111,7 +111,7 @@ body {
   gap: 8px;
 }
 
-.nav-link {
+.sidebar-item {
   border: 1px solid transparent;
   background: transparent;
   padding: 10px 12px;
@@ -124,12 +124,12 @@ body {
   transition: all 0.25s ease;
 }
 
-.nav-link:hover {
+.sidebar-item:hover {
   border-color: rgba(244, 199, 107, 0.25);
   color: var(--text);
 }
 
-.nav-link.active {
+.sidebar-item.is-active {
   background: rgba(244, 199, 107, 0.12);
   border-color: rgba(244, 199, 107, 0.5);
   color: var(--text);
@@ -234,6 +234,19 @@ body {
   padding: 18px 20px 60px;
   display: grid;
   gap: 18px;
+}
+
+.view {
+  display: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.view.view--active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .kpis {

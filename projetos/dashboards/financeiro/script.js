@@ -10,6 +10,30 @@ document.addEventListener("DOMContentLoaded", () => {
   setupReveal();
 });
 
+// Navegação de views
+function setupSidebar() {
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("sidebar-nav");
+  const items = document.querySelectorAll(".sidebar-item");
+  const views = document.querySelectorAll(".view");
+  const label = document.getElementById("section-label");
+
+  if (toggle && nav) toggle.addEventListener("click", () => nav.classList.toggle("open"));
+
+  const activate = (view) => {
+    items.forEach((i) => i.classList.toggle("is-active", i.dataset.view === view));
+    views.forEach((v) => v.classList.toggle("view--active", v.dataset.view === view));
+    if (label) label.textContent = view === "overview" ? "Visão geral" : view;
+  };
+
+  items.forEach((item) =>
+    item.addEventListener("click", () => {
+      activate(item.dataset.view);
+    })
+  );
+  activate("overview");
+}
+
 // Dados estáticos
 const dadosKPIs = {
   "7d": { saldo: 128000, receita: 54000, despesa: 32000, resultado: 22000, vars: { saldo: 4.2, receita: 6.5, despesa: -3.1, resultado: 8.4 } },
@@ -97,23 +121,6 @@ const tabelas = {
 
 let currentPeriod = "7d";
 let sortConfig = { key: null, asc: true };
-
-function setupSidebar() {
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.getElementById("sidebar-nav");
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => nav.classList.toggle("open"));
-  }
-  const links = document.querySelectorAll(".nav-link");
-  const label = document.getElementById("section-label");
-  links.forEach((link) => {
-    link.addEventListener("click", () => {
-      links.forEach((l) => l.classList.remove("active"));
-      link.classList.add("active");
-      if (label) label.textContent = link.textContent + " (apenas visual)";
-    });
-  });
-}
 
 function setupPeriodButtons() {
   const buttons = document.querySelectorAll(".period-btn");
@@ -208,14 +215,11 @@ function renderCategorias(period) {
   dadosCategorias[period].forEach((item) => {
     const row = document.createElement("div");
     row.className = "bar-row";
-    const label = document.createElement("div");
-    label.className = "bar-label";
-    label.innerHTML = `<span>${item.categoria}</span><span class="muted">${formatSimple(item.receita)} / ${formatSimple(item.despesa)}</span>`;
+
     const barReceita = document.createElement("div");
     barReceita.className = "bar";
     const fillR = document.createElement("div");
     fillR.className = "fill";
-    fillR.style.width = "0%";
     requestAnimationFrame(() => (fillR.style.width = `${item.receita}%`));
     barReceita.append(fillR);
 
@@ -223,9 +227,12 @@ function renderCategorias(period) {
     barDespesa.className = "bar expense";
     const fillD = document.createElement("div");
     fillD.className = "fill";
-    fillD.style.width = "0%";
     requestAnimationFrame(() => (fillD.style.width = `${item.despesa}%`));
     barDespesa.append(fillD);
+
+    const label = document.createElement("div");
+    label.className = "bar-label";
+    label.innerHTML = `<span>${item.categoria}</span><span class="muted">${formatSimple(item.receita)} / ${formatSimple(item.despesa)}</span>`;
 
     row.append(barReceita, barDespesa, label);
     wrap.appendChild(row);

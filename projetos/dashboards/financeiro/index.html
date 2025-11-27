@@ -25,11 +25,11 @@
         <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu">☰</button>
       </div>
       <nav class="sidebar-nav" id="sidebar-nav">
-        <button class="nav-link active" data-section="visao">Visão geral</button>
-        <button class="nav-link" data-section="receita">Receita</button>
-        <button class="nav-link" data-section="despesa">Despesas</button>
-        <button class="nav-link" data-section="fluxo">Fluxo de Caixa</button>
-        <button class="nav-link" data-section="metas">Metas</button>
+        <button class="sidebar-item is-active" data-view="overview">Visão geral</button>
+        <button class="sidebar-item" data-view="revenue">Receita</button>
+        <button class="sidebar-item" data-view="expenses">Despesas</button>
+        <button class="sidebar-item" data-view="cashflow">Fluxo de Caixa</button>
+        <button class="sidebar-item" data-view="goals">Metas</button>
       </nav>
       <div class="sidebar-footer">
         <p>Todos os dados são fictícios. Protótipo criado para portfólio.</p>
@@ -58,6 +58,8 @@
 
       <!-- Conteúdo -->
       <main class="content">
+        <!-- Visão geral -->
+        <section class="view view--active" data-view="overview">
         <section class="kpis hidden">
           <article class="kpi-card">
             <div class="kpi-head">
@@ -163,6 +165,39 @@
               </thead>
               <tbody id="table-body"></tbody>
             </table>
+          </div>
+        </section>
+        </section>
+
+        <!-- Receita -->
+        <section class="view" data-view="revenue">
+          <div class="card">
+            <h3>Receita</h3>
+            <p class="muted">Seção visual para Receita. Apenas demonstração; dados fictícios.</p>
+          </div>
+        </section>
+
+        <!-- Despesas -->
+        <section class="view" data-view="expenses">
+          <div class="card">
+            <h3>Despesas</h3>
+            <p class="muted">Seção visual para Despesas. Apenas demonstração; dados fictícios.</p>
+          </div>
+        </section>
+
+        <!-- Fluxo de Caixa -->
+        <section class="view" data-view="cashflow">
+          <div class="card">
+            <h3>Fluxo de Caixa</h3>
+            <p class="muted">Seção visual para Fluxo de Caixa. Apenas demonstração; dados fictícios.</p>
+          </div>
+        </section>
+
+        <!-- Metas -->
+        <section class="view" data-view="goals">
+          <div class="card">
+            <h3>Metas</h3>
+            <p class="muted">Seção visual para Metas. Apenas demonstração; dados fictícios.</p>
           </div>
         </section>
       </main>
