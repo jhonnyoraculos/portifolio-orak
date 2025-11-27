@@ -11,83 +11,284 @@
 </head>
 <body>
   <div class="bg-grad"></div>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">Orbita</span>
-      <span class="tag">Área interna (protótipo)</span>
-    </div>
-    <div class="actions">
-      <span class="note">Orbita é uma plataforma fictícia. Tudo aqui é apenas demonstração.</span>
-      <a class="btn ghost" href="index.html">Sair</a>
-    </div>
-  </header>
-
-  <main class="page">
-    <section class="intro">
-      <h1>Painel da Orbita (protótipo)</h1>
-      <p>Interface fictícia para demonstrar como seria o dashboard da plataforma Orbita. Nenhum dado é real ou conectado a backend.</p>
-    </section>
-
-    <section class="cards">
-      <article class="card">
-        <h3>Projetos ativos</h3>
-        <p>12 projetos em andamento</p>
-      </article>
-      <article class="card">
-        <h3>Equipes</h3>
-        <p>4 squads conectadas</p>
-      </article>
-      <article class="card">
-        <h3>Alertas</h3>
-        <p>2 entregas em atenção</p>
-      </article>
-      <article class="card">
-        <h3>Próximas entregas</h3>
-        <p>Release mobile — 02/12</p>
-      </article>
-      <article class="card wide">
-        <h3>Status geral</h3>
-        <p>Em dia · SLAs atendidos · Operação estável</p>
-      </article>
-    </section>
-
-    <section class="table-section">
-      <div class="table-header">
-        <h2>Tarefas e entregas</h2>
-        <p>Dados fictícios para demonstração de interface.</p>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="logo">Orbita</span>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu">☰</button>
       </div>
-      <div class="table">
-        <div class="table-row head">
-          <span>Projeto</span>
-          <span>Responsável</span>
-          <span>Status</span>
+      <p class="sidebar-note">Plataforma fictícia · Protótipo</p>
+      <nav class="sidebar-nav">
+        <button class="nav-link active" data-view="geral">Dashboard</button>
+        <button class="nav-link" data-view="projetos">Projetos</button>
+        <button class="nav-link" data-view="equipes">Equipes</button>
+        <button class="nav-link" data-view="relatorios">Relatórios</button>
+        <button class="nav-link" data-view="config">Configurações</button>
+      </nav>
+      <div class="sidebar-footer">
+        <p>Orbita é fictícia. Este painel é apenas um protótipo visual.</p>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div class="brand">
+          <span class="tag">Área interna (protótipo)</span>
         </div>
-        <div class="table-row">
-          <span>Portal Analytics</span>
-          <span>Equipe A</span>
-          <span class="pill success">Em dia</span>
+        <div class="actions">
+          <span class="note">Nenhum dado é real ou conectado a backend.</span>
+          <a class="btn ghost" href="index.html">Sair</a>
         </div>
-        <div class="table-row">
-          <span>Onboarding App</span>
-          <span>Equipe B</span>
-          <span class="pill warning">Atenção</span>
+      </header>
+
+      <main class="page">
+        <section class="view view--active" id="view-geral">
+          <div class="intro">
+            <h1>Painel da Orbita (protótipo)</h1>
+            <p>Interface fictícia para demonstrar como seria o dashboard da plataforma Orbita. Nenhum dado é real.</p>
+          </div>
+
+          <section class="cards">
+            <article class="card">
+              <h3>Projetos ativos</h3>
+              <p>12 projetos em andamento</p>
+            </article>
+            <article class="card">
+              <h3>Equipes</h3>
+              <p>4 squads conectadas</p>
+            </article>
+            <article class="card">
+              <h3>Alertas</h3>
+              <p>2 entregas em atenção</p>
+            </article>
+            <article class="card">
+              <h3>Próximas entregas</h3>
+              <p>Release mobile — 02/12</p>
+            </article>
+            <article class="card wide">
+              <h3>Status geral</h3>
+              <p>Em dia · SLAs atendidos · Operação estável</p>
+            </article>
+          </section>
+
+          <section class="workload">
+            <div class="workload-head">
+              <h3>Carga de trabalho por squad</h3>
+              <p>Dados fictícios · apenas visual</p>
+            </div>
+            <div class="workload-bars">
+              <div class="w-bar">
+                <span>Squad A</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 78%"></div></div>
+                <span class="value">78%</span>
+              </div>
+              <div class="w-bar">
+                <span>Squad B</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 64%"></div></div>
+                <span class="value">64%</span>
+              </div>
+              <div class="w-bar">
+                <span>Squad C</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 52%"></div></div>
+                <span class="value">52%</span>
+              </div>
+              <div class="w-bar">
+                <span>Ops</span>
+                <div class="bar-track"><div class="bar-fill" style="width: 85%"></div></div>
+                <span class="value">85%</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="table-section">
+            <div class="table-header">
+              <div>
+                <h2>Tarefas e entregas</h2>
+                <p>Dados fictícios para demonstração de interface.</p>
+              </div>
+              <div class="table-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="ok">Em dia</button>
+                <button class="filter-btn" data-filter="warn">Atenção</button>
+                <button class="filter-btn" data-filter="late">Atrasado</button>
+              </div>
+            </div>
+            <div class="table">
+              <div class="table-row head">
+                <span>Projeto</span>
+                <span>Responsável</span>
+                <span>Prioridade</span>
+                <span>Status</span>
+              </div>
+              <div class="table-row clickable" data-status="ok" data-name="Portal Analytics" data-squad="Equipe A" data-priority="Alta" data-next="Entrega 02/12" data-description="Monitoramento de KPIs e dashboards executivos.">
+                <span>Portal Analytics</span>
+                <span>Equipe A</span>
+                <span class="pill neutral">Alta</span>
+                <span class="pill success status-toggle">Em dia</span>
+              </div>
+              <div class="table-row clickable" data-status="warn" data-name="Onboarding App" data-squad="Equipe B" data-priority="Média" data-next="Entrega 05/12" data-description="Fluxo de onboarding com novas integrações.">
+                <span>Onboarding App</span>
+                <span>Equipe B</span>
+                <span class="pill neutral">Média</span>
+                <span class="pill warning status-toggle">Atenção</span>
+              </div>
+              <div class="table-row clickable" data-status="late" data-name="Integração ERP" data-squad="Equipe C" data-priority="Alta" data-next="Entrega 08/12" data-description="Conector ERP com processos críticos.">
+                <span>Integração ERP</span>
+                <span>Equipe C</span>
+                <span class="pill neutral">Alta</span>
+                <span class="pill danger status-toggle">Atrasado</span>
+              </div>
+              <div class="table-row clickable" data-status="ok" data-name="Suporte · SLA" data-squad="Equipe Ops" data-priority="Baixa" data-next="Monitoramento contínuo" data-description="Atendimento e SLAs de suporte interno.">
+                <span>Suporte · SLA</span>
+                <span>Equipe Ops</span>
+                <span class="pill neutral">Baixa</span>
+                <span class="pill success status-toggle">Em dia</span>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view" id="view-projetos">
+          <div class="section-head">
+            <h2>Projetos</h2>
+            <div class="filters">
+              <button class="filter-proj active" data-filter="all">Todos</button>
+              <button class="filter-proj" data-filter="ok">Em dia</button>
+              <button class="filter-proj" data-filter="warn">Atenção</button>
+              <button class="filter-proj" data-filter="late">Atrasado</button>
+            </div>
+          </div>
+          <div class="projects-grid">
+            <article class="project-card clickable" data-status="ok" data-name="Portal Analytics" data-squad="Squad A" data-next="Release 02/12" data-description="Painel executivo com KPIs estratégicos.">
+              <div class="project-top">
+                <h3>Portal Analytics</h3>
+                <span class="pill success">Em dia</span>
+              </div>
+              <p>Squad A · Dados & KPIs</p>
+              <div class="progress"><div style="width: 78%"></div></div>
+              <small>Progresso 78%</small>
+            </article>
+            <article class="project-card clickable" data-status="warn" data-name="Onboarding App" data-squad="Squad B" data-next="Revisão 05/12" data-description="Fluxo de onboarding e integrações.">
+              <div class="project-top">
+                <h3>Onboarding App</h3>
+                <span class="pill warning">Atenção</span>
+              </div>
+              <p>Squad B · Experiência</p>
+              <div class="progress"><div style="width: 62%"></div></div>
+              <small>Progresso 62%</small>
+            </article>
+            <article class="project-card clickable" data-status="late" data-name="Integração ERP" data-squad="Squad C" data-next="Entrega 08/12" data-description="Conector ERP com pedidos e estoque.">
+              <div class="project-top">
+                <h3>Integração ERP</h3>
+                <span class="pill danger">Atrasado</span>
+              </div>
+              <p>Squad C · Operações</p>
+              <div class="progress"><div style="width: 48%"></div></div>
+              <small>Progresso 48%</small>
+            </article>
+            <article class="project-card clickable" data-status="ok" data-name="Suporte · SLA" data-squad="Squad Ops" data-next="Monitoramento" data-description="SLAs de suporte e incidentes.">
+              <div class="project-top">
+                <h3>Suporte · SLA</h3>
+                <span class="pill success">Em dia</span>
+              </div>
+              <p>Ops · Confiabilidade</p>
+              <div class="progress"><div style="width: 85%"></div></div>
+              <small>Progresso 85%</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="view-equipes">
+          <div class="section-head">
+            <h2>Equipes</h2>
+          </div>
+          <div class="teams-grid">
+            <article class="team-card">
+              <div class="team-top">
+                <h3>Squad A</h3>
+                <span class="pill success">Em dia</span>
+              </div>
+              <p>8 pessoas · 3 projetos</p>
+            </article>
+            <article class="team-card">
+              <div class="team-top">
+                <h3>Squad B</h3>
+                <span class="pill warning">Atenção</span>
+              </div>
+              <p>7 pessoas · 2 projetos</p>
+            </article>
+            <article class="team-card">
+              <div class="team-top">
+                <h3>Squad C</h3>
+                <span class="pill danger">Atrasado</span>
+              </div>
+              <p>6 pessoas · 2 projetos</p>
+            </article>
+            <article class="team-card">
+              <div class="team-top">
+                <h3>Ops</h3>
+                <span class="pill success">Em dia</span>
+              </div>
+              <p>5 pessoas · Suporte & SLAs</p>
+            </article>
+          </div>
+          <div class="activity">
+            <h3>Atividade recente</h3>
+            <ul>
+              <li>[Squad A] concluiu a entrega do Portal Analytics</li>
+              <li>[Squad C] marcou Integração ERP como em atraso</li>
+              <li>[Ops] fechou incidente de SLA crítico</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="view" id="view-relatorios">
+          <div class="section-head">
+            <h2>Relatórios</h2>
+          </div>
+          <p class="muted">Área visual fictícia. Aqui ficariam gráficos e relatórios exportáveis.</p>
+        </section>
+
+        <section class="view" id="view-config">
+          <div class="section-head">
+            <h2>Configurações</h2>
+          </div>
+          <p class="muted">Protótipo: nenhuma configuração é persistida. Tudo é apenas visual.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal-detail">
+    <div class="modal">
+      <button class="modal-close" id="close-detail" aria-label="Fechar modal">×</button>
+      <h3 id="detail-title">Detalhes</h3>
+      <p class="muted" id="detail-description"></p>
+      <div class="detail-grid">
+        <div>
+          <p class="label">Squad</p>
+          <p id="detail-squad"></p>
         </div>
-        <div class="table-row">
-          <span>Integração ERP</span>
-          <span>Equipe C</span>
-          <span class="pill danger">Atrasado</span>
+        <div>
+          <p class="label">Status</p>
+          <p id="detail-status"></p>
         </div>
-        <div class="table-row">
-          <span>Suporte · SLA</span>
-          <span>Equipe Ops</span>
-          <span class="pill success">Em dia</span>
+        <div>
+          <p class="label">Prioridade</p>
+          <p id="detail-priority"></p>
+        </div>
+        <div>
+          <p class="label">Próxima entrega</p>
+          <p id="detail-next"></p>
         </div>
       </div>
-    </section>
-  </main>
+      <p class="muted small">Dados fictícios. Nenhum backend real.</p>
+    </div>
+  </div>
 
   <footer class="footer">
-    <p>Todos os dados exibidos aqui são fictícios. Este painel existe apenas como protótipo para portfólio.</p>
+    <p>Orbita é uma plataforma fictícia. Este painel é apenas um protótipo visual para portfólio; nenhum dado é real ou conectado a backend.</p>
   </footer>
+  <script src="dashboard.js"></script>
 </body>
 </html>
