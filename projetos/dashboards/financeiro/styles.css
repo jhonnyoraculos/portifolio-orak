@@ -465,6 +465,7 @@ body {
   flex-direction: column-reverse;
   gap: 2px;
   width: 100%;
+  position: relative;
 }
 
 .chart-animate-in {
@@ -518,6 +519,16 @@ body {
   width: 100%;
   border-radius: 6px;
   transition: height 0.5s ease;
+}
+
+.bar-label-top {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.85rem;
+  color: var(--text);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .stacked-label {
