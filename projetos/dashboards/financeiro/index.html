@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Financeiro — Protótipo ORAK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-mark">
+          <span class="logo-dot"></span>
+          <div>
+            <strong>ORAK Finance</strong>
+            <span>Dashboard Financeiro · Protótipo</span>
+          </div>
+        </div>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu">☰</button>
+      </div>
+      <nav class="sidebar-nav" id="sidebar-nav">
+        <button class="nav-link active" data-section="visao">Visão geral</button>
+        <button class="nav-link" data-section="receita">Receita</button>
+        <button class="nav-link" data-section="despesa">Despesas</button>
+        <button class="nav-link" data-section="fluxo">Fluxo de Caixa</button>
+        <button class="nav-link" data-section="metas">Metas</button>
+      </nav>
+      <div class="sidebar-footer">
+        <p>Todos os dados são fictícios. Protótipo criado para portfólio.</p>
+      </div>
+    </aside>
+
+    <div class="main">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="title">
+          <h1>Dashboard Financeiro</h1>
+          <p class="muted section-label" id="section-label">Visão geral</p>
+        </div>
+        <div class="top-actions">
+          <div class="period">
+            <button class="period-btn active" data-period="7d">7 dias</button>
+            <button class="period-btn" data-period="30d">30 dias</button>
+            <button class="period-btn" data-period="12m">12 meses</button>
+          </div>
+          <div class="user">
+            <span class="badge">Protótipo · Nenhum dado real</span>
+            <div class="avatar">JV</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Conteúdo -->
+      <main class="content">
+        <section class="kpis hidden">
+          <article class="kpi-card">
+            <div class="kpi-head">
+              <p>Saldo Atual</p>
+              <span class="pill neutral">Conta</span>
+            </div>
+            <h2 id="kpi-saldo">--</h2>
+            <div class="kpi-foot">
+              <span id="var-saldo" class="var">--</span>
+              <div class="spark" id="spark-saldo"></div>
+            </div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-head">
+              <p>Receita</p>
+              <span class="pill success">Entrada</span>
+            </div>
+            <h2 id="kpi-receita">--</h2>
+            <div class="kpi-foot">
+              <span id="var-receita" class="var">--</span>
+              <div class="spark" id="spark-receita"></div>
+            </div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-head">
+              <p>Despesa</p>
+              <span class="pill danger">Saída</span>
+            </div>
+            <h2 id="kpi-despesa">--</h2>
+            <div class="kpi-foot">
+              <span id="var-despesa" class="var">--</span>
+              <div class="spark" id="spark-despesa"></div>
+            </div>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-head">
+              <p>Resultado</p>
+              <span class="pill neutral">Lucro/Prejuízo</span>
+            </div>
+            <h2 id="kpi-resultado">--</h2>
+            <div class="kpi-foot">
+              <span id="var-resultado" class="var">--</span>
+              <div class="spark" id="spark-resultado"></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="charts-grid hidden">
+          <article class="card chart-card" id="chart-fluxo">
+            <div class="card-head">
+              <h3>Fluxo de Caixa</h3>
+              <p class="muted">Evolução de receita, despesa e saldo.</p>
+            </div>
+            <div class="legend">
+              <span class="dot income"></span>Receita
+              <span class="dot expense"></span>Despesa
+              <span class="dot balance"></span>Saldo
+            </div>
+            <div class="chart-area" id="fluxo-area"></div>
+          </article>
+
+          <article class="card chart-card" id="chart-categorias">
+            <div class="card-head">
+              <h3>Receitas x Despesas por categoria</h3>
+              <p class="muted">Categorias fictícias com barras animadas.</p>
+            </div>
+            <div class="bar-wrap" id="bars-categorias"></div>
+          </article>
+        </section>
+
+        <section class="table-section hidden">
+          <div class="table-head">
+            <div>
+              <h3>Lançamentos financeiros</h3>
+              <p class="muted">Todos os dados são fictícios.</p>
+            </div>
+            <div class="table-filters">
+              <div class="btn-group" id="tipo-filter">
+                <button class="chip active" data-tipo="todos">Todos</button>
+                <button class="chip" data-tipo="receita">Receitas</button>
+                <button class="chip" data-tipo="despesa">Despesas</button>
+              </div>
+              <div class="btn-group" id="status-filter">
+                <button class="chip active" data-status="todos">Todos</button>
+                <button class="chip" data-status="pago">Pago</button>
+                <button class="chip" data-status="pendente">Pendente</button>
+                <button class="chip" data-status="atrasado">Atrasado</button>
+              </div>
+              <input type="search" id="search" placeholder="Buscar descrição...">
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th data-sort="data">Data <span class="sort-indicator"></span></th>
+                  <th>Tipo</th>
+                  <th>Categoria</th>
+                  <th>Descrição</th>
+                  <th data-sort="valor">Valor <span class="sort-indicator"></span></th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        Este é um protótipo de dashboard financeiro criado para portfólio. Todos os dados são fictícios e não representam informações reais.
+      </footer>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="close-modal" aria-label="Fechar modal">×</button>
+      <h3 id="modal-title">Detalhes do lançamento</h3>
+      <p class="muted" id="modal-desc"></p>
+      <div class="modal-grid">
+        <div>
+          <p class="label">Data</p>
+          <p id="modal-data"></p>
+        </div>
+        <div>
+          <p class="label">Tipo</p>
+          <p id="modal-tipo"></p>
+        </div>
+        <div>
+          <p class="label">Categoria</p>
+          <p id="modal-categoria"></p>
+        </div>
+        <div>
+          <p class="label">Status</p>
+          <p id="modal-status"></p>
+        </div>
+        <div>
+          <p class="label">Valor</p>
+          <p id="modal-valor"></p>
+        </div>
+      </div>
+      <p class="muted small">Observação fictícia: este lançamento é apenas para demonstração visual.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
