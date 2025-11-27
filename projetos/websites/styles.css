@@ -77,6 +77,9 @@ h2 {
   padding: 20px;
   background: linear-gradient(140deg, rgba(255, 255, 255, 0.02), rgba(212, 166, 81, 0.04));
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 10px;
 }
 
 .card:hover {
