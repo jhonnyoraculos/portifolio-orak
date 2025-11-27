@@ -33,7 +33,7 @@
         <h1>Orbita</h1>
         <p class="subtitle">Painéis inteligentes para organizar dados, equipes e rotinas.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#">Testar protótipo</a>
+          <button class="btn primary" id="open-modal" type="button">Testar protótipo</button>
           <a class="btn ghost" href="#funcionalidades">Ver funcionalidades</a>
         </div>
       </div>
@@ -43,31 +43,36 @@
             <span class="dot dot-blue"></span>
             <span class="dot dot-cyan"></span>
             <span class="dot dot-violet"></span>
-            <span class="title">Dashboard · Equipe</span>
+            <span class="title">Dashboard · <span id="tab-title">Equipe</span></span>
+          </div>
+          <div class="tab-bar" id="tabs">
+            <button class="tab active" data-tab="equipe">Equipe</button>
+            <button class="tab" data-tab="projetos">Projetos</button>
+            <button class="tab" data-tab="sprints">Sprints</button>
           </div>
           <div class="ui-body">
             <div class="chart">
-              <div class="bar b1"></div>
-              <div class="bar b2"></div>
-              <div class="bar b3"></div>
-              <div class="bar b4"></div>
-              <div class="bar b5"></div>
+              <div class="bar b1" id="bar1"></div>
+              <div class="bar b2" id="bar2"></div>
+              <div class="bar b3" id="bar3"></div>
+              <div class="bar b4" id="bar4"></div>
+              <div class="bar b5" id="bar5"></div>
             </div>
             <div class="list">
               <div class="list-row">
-                <span class="tag success">Em dia</span>
-                <span class="label">Sprint Equipe A</span>
-                <span class="pill">92%</span>
+                <span class="tag success" id="row1-tag">Em dia</span>
+                <span class="label" id="row1-label">Sprint Equipe A</span>
+                <span class="pill" id="row1-pill">92%</span>
               </div>
               <div class="list-row">
-                <span class="tag warning">Atenção</span>
-                <span class="label">Suporte · SLA</span>
-                <span class="pill">68%</span>
+                <span class="tag warning" id="row2-tag">Atenção</span>
+                <span class="label" id="row2-label">Suporte · SLA</span>
+                <span class="pill" id="row2-pill">68%</span>
               </div>
               <div class="list-row">
-                <span class="tag neutral">Planejamento</span>
-                <span class="label">Q4 Roadmap</span>
-                <span class="pill">Em revisão</span>
+                <span class="tag neutral" id="row3-tag">Planejamento</span>
+                <span class="label" id="row3-label">Q4 Roadmap</span>
+                <span class="pill" id="row3-pill">Em revisão</span>
               </div>
             </div>
           </div>
@@ -75,7 +80,7 @@
       </div>
     </section>
 
-    <section class="section benefits" id="produto">
+    <section class="section benefits hidden" id="produto">
       <div class="section-header">
         <p class="kicker">Produto</p>
         <h2>Centralize equipes, dados e fluxo de trabalho</h2>
@@ -104,7 +109,7 @@
       </div>
     </section>
 
-    <section class="section features" id="funcionalidades">
+    <section class="section features hidden" id="funcionalidades">
       <div class="features-text">
         <p class="kicker">Funcionalidades</p>
         <h2>Dashboards personalizados e automação por regras</h2>
@@ -148,15 +153,20 @@
       </div>
     </section>
 
-    <section class="section plans" id="planos">
+    <section class="section plans hidden" id="planos">
       <div class="section-header">
         <p class="kicker">Planos</p>
         <h2>Escolha o plano ideal para seu time</h2>
       </div>
+      <div class="billing-toggle">
+        <button class="toggle-btn active" data-billing="mensal">Cobrança mensal</button>
+        <button class="toggle-btn" data-billing="anual">Cobrança anual</button>
+      </div>
       <div class="plan-grid">
         <article class="plan-card">
           <h3>Starter</h3>
-          <p class="price">R$ 49/mês</p>
+          <p class="price" data-plan="starter">R$ 49/mês</p>
+          <p class="saving" data-saving="starter"></p>
           <ul>
             <li>3 dashboards</li>
             <li>10 membros</li>
@@ -167,7 +177,8 @@
         <article class="plan-card featured">
           <div class="badge">Mais escolhido</div>
           <h3>Pro</h3>
-          <p class="price">R$ 129/mês</p>
+          <p class="price" data-plan="pro">R$ 129/mês</p>
+          <p class="saving" data-saving="pro"></p>
           <ul>
             <li>Dashboards ilimitados</li>
             <li>Times e permissões</li>
@@ -178,7 +189,8 @@
         </article>
         <article class="plan-card">
           <h3>Enterprise</h3>
-          <p class="price">Sob consulta</p>
+          <p class="price" data-plan="enterprise">Sob consulta</p>
+          <p class="saving" data-saving="enterprise"></p>
           <ul>
             <li>SSO e governança</li>
             <li>Suporte dedicado</li>
@@ -189,7 +201,34 @@
       </div>
     </section>
 
-    <section class="section contact" id="contato">
+    <section class="section faq hidden" id="faq">
+      <div class="section-header">
+        <p class="kicker">FAQ</p>
+        <h2>Dúvidas frequentes</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">Orbita é um produto real?</button>
+          <div class="faq-answer">
+            <p>Não. Orbita é um protótipo de landing page criado para portfólio. Não representa um produto ou serviço real.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Posso testar a plataforma?</button>
+          <div class="faq-answer">
+            <p>Você pode interagir com o protótipo visual. As ações simulam a experiência, mas não conectam a dados reais.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">Como falar com o time?</button>
+          <div class="faq-answer">
+            <p>Use o CTA de contato para enviar um email fictício ou solicitar uma demonstração simulada dentro do protótipo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact hidden" id="contato">
       <div class="section-header">
         <p class="kicker">Contato</p>
         <h2>Fale com o time Orbita</h2>
@@ -209,5 +248,24 @@
   <footer class="footer">
     <p>Orbita – Protótipo de plataforma criado para portfólio por Jhonatan Veiga (ORÁCULOS / ORΔK). Plataforma fictícia, não representa um produto real.</p>
   </footer>
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="close-modal" aria-label="Fechar modal">×</button>
+      <h3>Entrar na Orbita (protótipo)</h3>
+      <form id="login-form">
+        <label>
+          E-mail
+          <input type="email" name="email" required placeholder="voce@empresa.com">
+        </label>
+        <label>
+          Senha
+          <input type="password" name="password" required placeholder="••••••••">
+        </label>
+        <button type="submit" class="btn primary full">Entrar</button>
+        <p class="login-msg" id="login-msg"></p>
+      </form>
+    </div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
