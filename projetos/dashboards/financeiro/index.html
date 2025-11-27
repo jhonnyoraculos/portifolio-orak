@@ -171,33 +171,126 @@
 
         <!-- Receita -->
         <section class="view" data-view="revenue">
-          <div class="card">
-            <h3>Receita</h3>
-            <p class="muted">Seção visual para Receita. Apenas demonstração; dados fictícios.</p>
+          <div class="view-grid">
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Receita mensal (12 meses)</h3>
+                <p class="muted">Linha dourada com evolução fictícia.</p>
+              </div>
+              <div id="chart-revenue-line" class="chart-line chart-animate-in"></div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Receita por canal</h3>
+                <p class="muted">Crescimento animado por canal.</p>
+              </div>
+              <div id="chart-revenue-bars" class="chart-bars chart-animate-in"></div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Receita por categoria</h3>
+                <p class="muted">Distribuição fictícia em donut.</p>
+              </div>
+              <div class="donut-wrap">
+                <svg id="chart-revenue-donut" viewBox="0 0 160 160" class="donut"></svg>
+                <div id="chart-revenue-legend" class="donut-legend"></div>
+              </div>
+            </article>
           </div>
         </section>
 
         <!-- Despesas -->
         <section class="view" data-view="expenses">
-          <div class="card">
-            <h3>Despesas</h3>
-            <p class="muted">Seção visual para Despesas. Apenas demonstração; dados fictícios.</p>
+          <div class="view-grid">
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Despesas fixas x variáveis (6 meses)</h3>
+                <p class="muted">Colunas empilhadas com valores fictícios.</p>
+              </div>
+              <div id="chart-expenses-stacked" class="chart-stacked chart-animate-in"></div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Despesas por categoria</h3>
+                <p class="muted">Distribuição fictícia em donut.</p>
+              </div>
+              <div class="donut-wrap">
+                <svg id="chart-expenses-donut" viewBox="0 0 160 160" class="donut"></svg>
+                <div id="chart-expenses-legend" class="donut-legend"></div>
+              </div>
+            </article>
+
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Resumo de despesas</h3>
+                <p class="muted">Período fictício.</p>
+              </div>
+              <div id="expenses-resumo" class="resumo-list"></div>
+            </article>
           </div>
         </section>
 
         <!-- Fluxo de Caixa -->
         <section class="view" data-view="cashflow">
-          <div class="card">
-            <h3>Fluxo de Caixa</h3>
-            <p class="muted">Seção visual para Fluxo de Caixa. Apenas demonstração; dados fictícios.</p>
+          <div class="view-grid">
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Entradas x Saídas (semanal)</h3>
+                <p class="muted">Linhas fictícias com pontos.</p>
+              </div>
+              <div id="chart-cashflow-lines" class="chart-lines chart-animate-in"></div>
+            </article>
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Saldo semanal</h3>
+                <p class="muted">Barras positivas/negativas.</p>
+              </div>
+              <div id="chart-cashflow-bars" class="chart-bars chart-animate-in"></div>
+            </article>
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Indicadores de fluxo</h3>
+                <p class="muted">Métricas fictícias.</p>
+              </div>
+              <div id="cashflow-resumo" class="resumo-list"></div>
+            </article>
           </div>
         </section>
 
         <!-- Metas -->
         <section class="view" data-view="goals">
-          <div class="card">
-            <h3>Metas</h3>
-            <p class="muted">Seção visual para Metas. Apenas demonstração; dados fictícios.</p>
+          <div class="view-grid">
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Metas principais</h3>
+                <p class="muted">Progresso em donuts.</p>
+              </div>
+              <div id="goals-radiais" class="radial-grid chart-animate-in"></div>
+            </article>
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Linha do tempo</h3>
+                <p class="muted">Checkpoints fictícios.</p>
+              </div>
+              <div id="goals-timeline" class="timeline"></div>
+            </article>
+            <article class="card chart-card">
+              <div class="card-head">
+                <h3>Metas secundárias</h3>
+                <p class="muted">Tabela visual.</p>
+              </div>
+              <div class="table-wrapper mini">
+                <table id="goals-table">
+                  <thead>
+                    <tr><th>Meta</th><th>Responsável</th><th>Status</th><th>Prazo</th></tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </article>
           </div>
         </section>
       </main>

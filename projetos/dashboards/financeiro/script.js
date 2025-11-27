@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
   setupReveal();
 });
 
+let revenueRendered = false;
+let expensesRendered = false;
+let cashflowRendered = false;
+let goalsRendered = false;
+
 // Navegação de views
 function setupSidebar() {
   const toggle = document.getElementById("menu-toggle");
@@ -24,6 +29,30 @@ function setupSidebar() {
     items.forEach((i) => i.classList.toggle("is-active", i.dataset.view === view));
     views.forEach((v) => v.classList.toggle("view--active", v.dataset.view === view));
     if (label) label.textContent = view === "overview" ? "Visão geral" : view;
+    if (view === "revenue" && !revenueRendered) {
+      renderGraficoLinhaReceita(dadosReceita.mensal);
+      renderGraficoBarrasReceita(dadosReceita.porCanal);
+      renderGraficoPizzaReceita(dadosReceita.porCategoria);
+      revenueRendered = true;
+    }
+    if (view === "expenses" && !expensesRendered) {
+      renderGraficoEmpilhadoDespesas(dadosDespesas.mensal);
+      renderGraficoPizzaDespesas(dadosDespesas.porCategoria);
+      renderResumoDespesas(dadosDespesas.resumo);
+      expensesRendered = true;
+    }
+    if (view === "cashflow" && !cashflowRendered) {
+      renderLinhaFluxoCaixa(dadosFluxoCaixa);
+      renderBarrasSaldoSemanal(dadosFluxoCaixa);
+      renderResumoFluxoCaixa(dadosFluxoCaixa);
+      cashflowRendered = true;
+    }
+    if (view === "goals" && !goalsRendered) {
+      renderMetasRadiais(dadosMetas.principais);
+      renderTimelineMetas(dadosMetas.timeline);
+      renderTabelaMetas(dadosMetas.secundarias);
+      goalsRendered = true;
+    }
   };
 
   items.forEach((item) =>
@@ -62,6 +91,85 @@ const dadosFluxo = {
     { label: "Q2", receita: 520, despesa: 430, saldo: 90 },
     { label: "Q3", receita: 510, despesa: 440, saldo: 70 },
     { label: "Q4", receita: 520, despesa: 410, saldo: 110 },
+  ],
+};
+
+const dadosReceita = {
+  mensal: [
+    { mes: "Jan", valor: 120 },
+    { mes: "Fev", valor: 140 },
+    { mes: "Mar", valor: 135 },
+    { mes: "Abr", valor: 150 },
+    { mes: "Mai", valor: 160 },
+    { mes: "Jun", valor: 170 },
+    { mes: "Jul", valor: 165 },
+    { mes: "Ago", valor: 180 },
+    { mes: "Set", valor: 175 },
+    { mes: "Out", valor: 190 },
+    { mes: "Nov", valor: 210 },
+    { mes: "Dez", valor: 230 },
+  ],
+  porCanal: [
+    { canal: "Loja Física", valor: 180 },
+    { canal: "E-commerce", valor: 230 },
+    { canal: "B2B", valor: 140 },
+    { canal: "Assinaturas", valor: 120 },
+  ],
+  porCategoria: [
+    { categoria: "Produtos", percentual: 45 },
+    { categoria: "Serviços", percentual: 28 },
+    { categoria: "Licenças", percentual: 18 },
+    { categoria: "Outros", percentual: 9 },
+  ],
+};
+
+const dadosDespesas = {
+  mensal: [
+    { mes: "Jan", fixas: 40, variaveis: 20 },
+    { mes: "Fev", fixas: 42, variaveis: 22 },
+    { mes: "Mar", fixas: 44, variaveis: 26 },
+    { mes: "Abr", fixas: 46, variaveis: 28 },
+    { mes: "Mai", fixas: 48, variaveis: 30 },
+    { mes: "Jun", fixas: 50, variaveis: 32 },
+  ],
+  porCategoria: [
+    { categoria: "Operacional", percentual: 30 },
+    { categoria: "Marketing", percentual: 18 },
+    { categoria: "Pessoal", percentual: 28 },
+    { categoria: "Impostos", percentual: 14 },
+    { categoria: "Outros", percentual: 10 },
+  ],
+  resumo: {
+    total: 118000,
+    variacao: -4.2,
+    top: ["Operacional", "Pessoal", "Marketing"],
+  },
+};
+
+const dadosFluxoCaixa = [
+  { semana: "S1", entradas: 50, saidas: 42, saldo: 8 },
+  { semana: "S2", entradas: 54, saidas: 48, saldo: 6 },
+  { semana: "S3", entradas: 60, saidas: 52, saldo: 8 },
+  { semana: "S4", entradas: 58, saidas: 65, saldo: -7 },
+  { semana: "S5", entradas: 62, saidas: 50, saldo: 12 },
+];
+
+const dadosMetas = {
+  principais: [
+    { nome: "Receita anual", percentual: 78 },
+    { nome: "Margem", percentual: 64 },
+    { nome: "Reserva", percentual: 52 },
+  ],
+  timeline: [
+    { etapa: "Q1", status: "ok", descricao: "Atingiu 95% da meta do trimestre." },
+    { etapa: "Q2", status: "ok", descricao: "Margem dentro do esperado." },
+    { etapa: "Q3", status: "late", descricao: "Atraso em metas de custo." },
+    { etapa: "Q4", status: "pending", descricao: "Em andamento." },
+  ],
+  secundarias: [
+    { meta: "Reduzir CAC", responsavel: "Growth", status: "Em andamento", prazo: "Mar" },
+    { meta: "Automação fiscal", responsavel: "Financeiro", status: "Concluído", prazo: "Jan" },
+    { meta: "Reserva 6 meses", responsavel: "CFO", status: "Atrasado", prazo: "Jun" },
   ],
 };
 
@@ -265,6 +373,287 @@ function renderTabela(period) {
   });
 }
 
+// ====== Receita ======
+function renderGraficoLinhaReceita(dados) {
+  const container = document.getElementById("chart-revenue-line");
+  if (!container) return;
+  container.innerHTML = "";
+  const max = Math.max(...dados.map((d) => d.valor));
+  dados.forEach((d, i) => {
+    const bar = document.createElement("div");
+    bar.className = "line chart-bar";
+    bar.style.height = "6px";
+    bar.style.width = `${(d.valor / max) * 100}%`;
+    bar.style.background = "linear-gradient(90deg, rgba(244,199,107,0.3), rgba(244,199,107,0.8))";
+    const row = document.createElement("div");
+    row.className = "chart-row";
+    const label = document.createElement("span");
+    label.textContent = d.mes;
+    label.className = "muted";
+    row.append(label, bar);
+    container.appendChild(row);
+  });
+}
+
+function renderGraficoBarrasReceita(dados) {
+  const container = document.getElementById("chart-revenue-bars");
+  if (!container) return;
+  container.innerHTML = "";
+  const max = Math.max(...dados.map((d) => d.valor));
+  dados.forEach((d) => {
+    const wrap = document.createElement("div");
+    wrap.className = "bar-column";
+    const bar = document.createElement("div");
+    bar.className = "bar-vert";
+    bar.style.height = "0%";
+    requestAnimationFrame(() => (bar.style.height = `${(d.valor / max) * 100}%`));
+    const val = document.createElement("span");
+    val.className = "bar-value";
+    val.textContent = formatSimple(d.valor);
+    const label = document.createElement("span");
+    label.className = "muted";
+    label.textContent = d.canal;
+    wrap.append(val, bar, label);
+    container.appendChild(wrap);
+  });
+}
+
+function renderGraficoPizzaReceita(dados) {
+  const svg = document.getElementById("chart-revenue-donut");
+  const legend = document.getElementById("chart-revenue-legend");
+  if (!svg || !legend) return;
+  svg.innerHTML = "";
+  legend.innerHTML = "";
+  const total = dados.reduce((sum, d) => sum + d.percentual, 0);
+  let offset = 0;
+  const colors = ["#f4c76b", "#5ce1a9", "#7fb3ff", "#ff7b7b"];
+  dados.forEach((d, i) => {
+    const pct = d.percentual / total;
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "80");
+    circle.setAttribute("cy", "80");
+    circle.setAttribute("r", "60");
+    circle.setAttribute("fill", "transparent");
+    circle.setAttribute("stroke", colors[i % colors.length]);
+    circle.setAttribute("stroke-width", "18");
+    circle.setAttribute("stroke-dasharray", `${pct * 377} 377`);
+    circle.setAttribute("stroke-dashoffset", `${-offset * 377}`);
+    circle.setAttribute("stroke-linecap", "round");
+    svg.appendChild(circle);
+    offset += pct;
+
+    const item = document.createElement("div");
+    item.innerHTML = `<span class="dot" style="background:${colors[i % colors.length]}"></span>${d.categoria} — ${d.percentual}%`;
+    legend.appendChild(item);
+  });
+}
+
+// ====== Despesas ======
+function renderGraficoEmpilhadoDespesas(dados) {
+  const container = document.getElementById("chart-expenses-stacked");
+  if (!container) return;
+  container.innerHTML = "";
+  const max = Math.max(...dados.map((d) => d.fixas + d.variaveis));
+  const row = document.createElement("div");
+  row.className = "stacked-row";
+  dados.forEach((d) => {
+    const col = document.createElement("div");
+    col.className = "stacked-col";
+    const varPart = document.createElement("div");
+    varPart.className = "stacked-part";
+    varPart.style.background = "linear-gradient(180deg, rgba(255,123,123,0.7), rgba(255,123,123,0.4))";
+    varPart.style.height = "0%";
+    const fixPart = document.createElement("div");
+    fixPart.className = "stacked-part";
+    fixPart.style.background = "linear-gradient(180deg, rgba(244,199,107,0.7), rgba(244,199,107,0.4))";
+    fixPart.style.height = "0%";
+    requestAnimationFrame(() => {
+      varPart.style.height = `${(d.variaveis / max) * 100}%`;
+      fixPart.style.height = `${(d.fixas / max) * 100}%`;
+    });
+    const label = document.createElement("div");
+    label.className = "stacked-label";
+    label.textContent = d.mes;
+    col.append(varPart, fixPart, label);
+    row.appendChild(col);
+  });
+  container.appendChild(row);
+}
+
+function renderGraficoPizzaDespesas(dados) {
+  const svg = document.getElementById("chart-expenses-donut");
+  const legend = document.getElementById("chart-expenses-legend");
+  if (!svg || !legend) return;
+  svg.innerHTML = "";
+  legend.innerHTML = "";
+  const total = dados.reduce((sum, d) => sum + d.percentual, 0);
+  let offset = 0;
+  const colors = ["#f4c76b", "#5ce1a9", "#7fb3ff", "#ff7b7b", "#ffb946"];
+  dados.forEach((d, i) => {
+    const pct = d.percentual / total;
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "80");
+    circle.setAttribute("cy", "80");
+    circle.setAttribute("r", "60");
+    circle.setAttribute("fill", "transparent");
+    circle.setAttribute("stroke", colors[i % colors.length]);
+    circle.setAttribute("stroke-width", "18");
+    circle.setAttribute("stroke-dasharray", `${pct * 377} 377`);
+    circle.setAttribute("stroke-dashoffset", `${-offset * 377}`);
+    circle.setAttribute("stroke-linecap", "round");
+    svg.appendChild(circle);
+    offset += pct;
+    const item = document.createElement("div");
+    item.innerHTML = `<span class="dot" style="background:${colors[i % colors.length]}"></span>${d.categoria} — ${d.percentual}%`;
+    legend.appendChild(item);
+  });
+}
+
+function renderResumoDespesas(resumo) {
+  const container = document.getElementById("expenses-resumo");
+  if (!container) return;
+  container.innerHTML = `
+    <div><strong>Total:</strong> ${formatCurrency(-resumo.total)}</div>
+    <div class="${resumo.variacao >= 0 ? "var positive" : "var negative"}">${resumo.variacao >= 0 ? "▲" : "▼"} ${Math.abs(resumo.variacao)}%</div>
+    <div><strong>Top 3 categorias:</strong><br>${resumo.top.join(", ")}</div>
+  `;
+}
+
+// ====== Fluxo de Caixa ======
+function renderLinhaFluxoCaixa(dados) {
+  const container = document.getElementById("chart-cashflow-lines");
+  if (!container) return;
+  container.innerHTML = "";
+  const max = Math.max(...dados.map((d) => Math.max(d.entradas, d.saidas)));
+  dados.forEach((d) => {
+    const row = document.createElement("div");
+    row.className = "line-pair";
+    const label = document.createElement("span");
+    label.className = "muted";
+    label.textContent = d.semana;
+    const track = document.createElement("div");
+    track.className = "line-track";
+    const fillIn = document.createElement("div");
+    fillIn.className = "line-fill green";
+    fillIn.style.width = `${(d.entradas / max) * 100}%`;
+    const fillOut = document.createElement("div");
+    fillOut.className = "line-fill red";
+    fillOut.style.width = `${(d.saidas / max) * 100}%`;
+    track.append(fillIn, fillOut);
+    row.append(label, track);
+    container.appendChild(row);
+  });
+}
+
+function renderBarrasSaldoSemanal(dados) {
+  const container = document.getElementById("chart-cashflow-bars");
+  if (!container) return;
+  container.innerHTML = "";
+  const max = Math.max(...dados.map((d) => Math.abs(d.saldo)));
+  dados.forEach((d) => {
+    const wrap = document.createElement("div");
+    wrap.className = "bar-column";
+    const bar = document.createElement("div");
+    bar.className = "bar-vert";
+    bar.style.background = d.saldo >= 0 ? "linear-gradient(180deg, rgba(92,225,169,0.8), rgba(92,225,169,0.5))" : "linear-gradient(180deg, rgba(255,123,123,0.8), rgba(255,123,123,0.5))";
+    bar.style.height = "0%";
+    requestAnimationFrame(() => (bar.style.height = `${(Math.abs(d.saldo) / max) * 100}%`));
+    const val = document.createElement("span");
+    val.className = "bar-value";
+    val.textContent = formatSimple(d.saldo);
+    const label = document.createElement("span");
+    label.className = "muted";
+    label.textContent = d.semana;
+    wrap.append(val, bar, label);
+    container.appendChild(wrap);
+  });
+}
+
+function renderResumoFluxoCaixa(dados) {
+  const container = document.getElementById("cashflow-resumo");
+  if (!container) return;
+  const saldoMedio = dados.reduce((sum, d) => sum + d.saldo, 0) / dados.length;
+  const melhor = dados.reduce((a, b) => (a.saldo > b.saldo ? a : b));
+  const pior = dados.reduce((a, b) => (a.saldo < b.saldo ? a : b));
+  container.innerHTML = `
+    <div><strong>Saldo médio:</strong> ${formatSimple(saldoMedio)}</div>
+    <div><strong>Melhor semana:</strong> ${melhor.semana} (${formatSimple(melhor.saldo)})</div>
+    <div><strong>Pior semana:</strong> ${pior.semana} (${formatSimple(pior.saldo)})</div>
+  `;
+}
+
+// ====== Metas ======
+function renderMetasRadiais(dados) {
+  const container = document.getElementById("goals-radiais");
+  if (!container) return;
+  container.innerHTML = "";
+  dados.forEach((d) => {
+    const wrap = document.createElement("div");
+    wrap.className = "radial";
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("viewBox", "0 0 120 120");
+    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("cx", "60");
+    circle.setAttribute("cy", "60");
+    circle.setAttribute("r", "52");
+    circle.setAttribute("fill", "transparent");
+    circle.setAttribute("stroke", "rgba(255,255,255,0.08)");
+    circle.setAttribute("stroke-width", "10");
+    const fg = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    fg.setAttribute("cx", "60");
+    fg.setAttribute("cy", "60");
+    fg.setAttribute("r", "52");
+    fg.setAttribute("fill", "transparent");
+    fg.setAttribute("stroke", "url(#grad)");
+    fg.setAttribute("stroke-width", "10");
+    fg.setAttribute("stroke-linecap", "round");
+    const len = 2 * Math.PI * 52;
+    fg.setAttribute("stroke-dasharray", `${len} ${len}`);
+    fg.setAttribute("stroke-dashoffset", `${len}`);
+    svg.append(circle, fg);
+    wrap.appendChild(svg);
+    const label = document.createElement("p");
+    label.innerHTML = `<strong>${d.nome}</strong><br>${d.percentual}%`;
+    wrap.appendChild(label);
+    container.appendChild(wrap);
+    requestAnimationFrame(() => {
+      fg.style.strokeDashoffset = `${len * (1 - d.percentual / 100)}`;
+      fg.style.stroke = "linear-gradient(120deg, var(--gold), var(--green))";
+    });
+  });
+}
+
+function renderTimelineMetas(dados) {
+  const container = document.getElementById("goals-timeline");
+  if (!container) return;
+  container.innerHTML = "";
+  dados.forEach((d) => {
+    const item = document.createElement("div");
+    item.className = "timeline-item";
+    const dot = document.createElement("div");
+    dot.className = "timeline-dot";
+    if (d.status === "late") dot.style.background = "var(--red)";
+    if (d.status === "pending") dot.style.background = "var(--gold)";
+    const title = document.createElement("p");
+    title.innerHTML = `<strong>${d.etapa}</strong>`;
+    const desc = document.createElement("p");
+    desc.className = "muted";
+    desc.textContent = d.descricao;
+    item.append(dot, title, desc);
+    container.appendChild(item);
+  });
+}
+
+function renderTabelaMetas(dados) {
+  const tbody = document.querySelector("#goals-table tbody");
+  if (!tbody) return;
+  tbody.innerHTML = "";
+  dados.forEach((d) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${d.meta}</td><td>${d.responsavel}</td><td>${d.status}</td><td>${d.prazo}</td>`;
+    tbody.appendChild(tr);
+  });
+}
 function formatDate(iso) {
   const [y, m, d] = iso.split("-");
   return `${d}/${m}/${y}`;
