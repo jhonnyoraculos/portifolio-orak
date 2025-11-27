@@ -145,3 +145,23 @@ h2 {
     grid-template-columns: 1fr;
   }
 }
+.back-portfolio {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  padding: 10px 14px;
+  border: 1px solid rgba(212, 166, 81, 0.35);
+  border-radius: 999px;
+  color: var(--gold);
+  background: rgba(11, 11, 11, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  z-index: 30;
+  transition: all 0.25s ease;
+}
+
+.back-portfolio:hover {
+  background: rgba(212, 166, 81, 0.15);
+  color: #f3d8a0;
+}

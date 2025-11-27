@@ -53,6 +53,28 @@ h3 {
   z-index: 0;
 }
 
+.back-portfolio {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 27, 46, 0.18);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  z-index: 30;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 20px -16px rgba(0, 0, 0, 0.25);
+}
+
+.back-portfolio:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+
 .blur-shape {
   width: 320px;
   height: 320px;
