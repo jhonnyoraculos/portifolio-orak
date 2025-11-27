@@ -434,6 +434,11 @@ main {
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 220px;
+  height: 100%;
 }
 
 .card::after {
@@ -462,11 +467,19 @@ main {
 }
 
 .card .card-btn {
-  margin-top: 12px;
+  margin-top: auto;
   padding: 10px 16px;
   font-size: 0.85rem;
   position: relative;
   z-index: 1;
+  align-self: flex-start;
+}
+
+.card-btn.disabled {
+  opacity: 0.6;
+  border-color: rgba(212, 166, 81, 0.3);
+  cursor: default;
+  pointer-events: none;
 }
 
 .card:hover {

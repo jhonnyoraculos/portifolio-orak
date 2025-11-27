@@ -842,3 +842,27 @@ tr:hover {
     width: 100%;
   }
 }
+
+@media (max-width: 760px) {
+  .charts-grid,
+  .view-grid,
+  .grid-2,
+  .grid-3,
+  .radial-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .chart-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .table-wrapper {
+    overflow-x: auto;
+  }
+
+  table.table {
+    min-width: 640px;
+  }
+}
