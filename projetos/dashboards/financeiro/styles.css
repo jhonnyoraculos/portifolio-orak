@@ -855,6 +855,10 @@ tr:hover {
     grid-template-columns: 1fr !important;
   }
 
+  .kpis {
+    grid-template-columns: 1fr !important;
+  }
+
   .chart-row {
     display: flex;
     flex-direction: column;
