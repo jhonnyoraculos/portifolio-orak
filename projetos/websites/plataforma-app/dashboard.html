@@ -14,19 +14,29 @@
   <div class="layout">
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <span class="logo">Orbita</span>
+        <div class="logo-mark">
+          <span class="logo-dot"></span>
+          <span class="logo-text">Orbita</span>
+        </div>
         <button class="menu-toggle" id="menu-toggle" aria-label="Alternar menu">☰</button>
       </div>
       <p class="sidebar-note">Plataforma fictícia · Protótipo</p>
-      <nav class="sidebar-nav">
-        <button class="nav-link active" data-view="geral">Dashboard</button>
-        <button class="nav-link" data-view="projetos">Projetos</button>
-        <button class="nav-link" data-view="equipes">Equipes</button>
-        <button class="nav-link" data-view="relatorios">Relatórios</button>
-        <button class="nav-link" data-view="config">Configurações</button>
+      <nav class="sidebar-nav" id="sidebar-nav">
+        <button class="nav-link active" data-view="geral"><span class="nav-ico">⬤</span>Dashboard</button>
+        <button class="nav-link" data-view="projetos"><span class="nav-ico">⬤</span>Projetos</button>
+        <button class="nav-link" data-view="equipes"><span class="nav-ico">⬤</span>Equipes</button>
+        <button class="nav-link" data-view="relatorios"><span class="nav-ico">⬤</span>Relatórios</button>
+        <button class="nav-link" data-view="config"><span class="nav-ico">⬤</span>Configurações</button>
       </nav>
       <div class="sidebar-footer">
-        <p>Orbita é fictícia. Este painel é apenas um protótipo visual.</p>
+        <div class="sidebar-user">
+          <div class="avatar-inicial">JV</div>
+          <div class="sidebar-user-info">
+            <strong>Jhonatan</strong>
+            <span>Protótipo · ORÁCULOS / ORΔK</span>
+          </div>
+        </div>
+        <p class="sidebar-note">Orbita é fictícia. Painel apenas para portfólio.</p>
       </div>
     </aside>
 
@@ -244,16 +254,111 @@
 
         <section class="view" id="view-relatorios">
           <div class="section-head">
-            <h2>Relatórios</h2>
+            <div>
+              <h2>Relatórios</h2>
+              <p class="muted">Área visual fictícia. Aqui simulamos gráficos e relatórios exportáveis da Orbita.</p>
+            </div>
+            <div class="report-filters">
+              <div class="filter-group">
+                <span>Período:</span>
+                <button class="filter-report active" data-period="7">7 dias</button>
+                <button class="filter-report" data-period="30">30 dias</button>
+                <button class="filter-report" data-period="90">90 dias</button>
+              </div>
+              <div class="filter-group">
+                <span>Foco:</span>
+                <button class="filter-focus active" data-focus="equipes">Equipes</button>
+                <button class="filter-focus" data-focus="projetos">Projetos</button>
+              </div>
+            </div>
           </div>
-          <p class="muted">Área visual fictícia. Aqui ficariam gráficos e relatórios exportáveis.</p>
+          <div class="reports-grid">
+            <article class="card report-card">
+              <div class="report-head">
+                <h3>Performance por squad</h3>
+                <p class="muted">Valores mudam conforme período.</p>
+              </div>
+              <div class="report-bars" id="report-bars">
+                <div class="r-bar"><span>Squad A</span><div class="r-track"><div class="r-fill" data-squad="A"></div></div><span class="r-val" data-val="A">-</span></div>
+                <div class="r-bar"><span>Squad B</span><div class="r-track"><div class="r-fill" data-squad="B"></div></div><span class="r-val" data-val="B">-</span></div>
+                <div class="r-bar"><span>Squad C</span><div class="r-track"><div class="r-fill" data-squad="C"></div></div><span class="r-val" data-val="C">-</span></div>
+                <div class="r-bar"><span>Ops</span><div class="r-track"><div class="r-fill" data-squad="Ops"></div></div><span class="r-val" data-val="Ops">-</span></div>
+              </div>
+            </article>
+            <article class="card report-card">
+              <div class="report-head">
+                <h3>SLAs e incidentes</h3>
+                <p class="muted">Indicadores fictícios variam por período.</p>
+              </div>
+              <div class="sla-grid" id="sla-grid">
+                <div class="sla-item">
+                  <p class="label">SLAs atendidos (%)</p>
+                  <p class="sla-val" data-sla="sla">-</p>
+                </div>
+                <div class="sla-item">
+                  <p class="label">Incidentes críticos</p>
+                  <p class="sla-val" data-sla="incidentes">-</p>
+                </div>
+                <div class="sla-item">
+                  <p class="label">Tempo médio de resolução</p>
+                  <p class="sla-val" data-sla="tempo">-</p>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="export-actions">
+            <button class="btn primary export-btn" data-type="csv">Exportar CSV</button>
+            <button class="btn ghost export-btn" data-type="pdf">Exportar PDF</button>
+          </div>
+          <p class="muted small" id="export-msg"></p>
         </section>
 
         <section class="view" id="view-config">
           <div class="section-head">
-            <h2>Configurações</h2>
+            <div>
+              <h2>Configurações</h2>
+              <p class="muted">Protótipo: nenhuma configuração é persistida. Tudo é apenas visual.</p>
+            </div>
           </div>
-          <p class="muted">Protótipo: nenhuma configuração é persistida. Tudo é apenas visual.</p>
+          <div class="settings-grid">
+            <article class="card settings-card">
+              <h3>Preferências de conta</h3>
+              <label>Nome
+                <input type="text" id="cfg-nome" value="Jhonatan Veiga">
+              </label>
+              <label>E-mail
+                <input type="email" id="cfg-email" value="voce@empresa.com">
+              </label>
+              <button class="btn primary" id="btn-save-cfg" type="button">Salvar alterações</button>
+              <p class="msg" id="cfg-msg"></p>
+            </article>
+            <article class="card settings-card">
+              <h3>Notificações</h3>
+              <label class="toggle">
+                <input type="checkbox" id="notif-email" checked>
+                <span class="toggle-slider"></span>
+                Receber alertas por e-mail
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="notif-resumo" checked>
+                <span class="toggle-slider"></span>
+                Receber resumo semanal
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="notif-sla" checked>
+                <span class="toggle-slider"></span>
+                Alertas de SLA crítico
+              </label>
+            </article>
+            <article class="card settings-card">
+              <h3>Tema (protótipo)</h3>
+              <div class="theme-switch">
+                <button class="btn ghost theme-btn active" data-theme="light" type="button">Claro</button>
+                <button class="btn ghost theme-btn" data-theme="dark" type="button">Escuro</button>
+              </div>
+              <p class="muted small">Tema aplicado somente enquanto a página estiver aberta.</p>
+            </article>
+          </div>
         </section>
       </main>
     </div>
@@ -287,7 +392,7 @@
   </div>
 
   <footer class="footer">
-    <p>Orbita é uma plataforma fictícia. Este painel é apenas um protótipo visual para portfólio; nenhum dado é real ou conectado a backend.</p>
+    <p>Orbita é fictícia. Este painel é apenas um protótipo visual para portfólio; nenhum dado é real ou conectado a backend.</p>
   </footer>
   <script src="dashboard.js"></script>
 </body>

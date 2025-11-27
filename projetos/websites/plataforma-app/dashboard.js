@@ -1,5 +1,5 @@
 // Dashboard Orbita - protótipo front-end
-// Controla navegação entre seções, filtros, ciclo de status e modal de detalhes.
+// Controla navegação, filtros, ciclo de status, modal de detalhes, relatórios e tema.
 
 document.addEventListener("DOMContentLoaded", () => {
   setupSidebar();
@@ -8,11 +8,14 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTaskFilters();
   setupStatusCycle();
   setupModalDetails();
+  setupReports();
+  setupExports();
+  setupConfig();
 });
 
 function setupSidebar() {
   const toggle = document.getElementById("menu-toggle");
-  const nav = document.querySelector(".sidebar-nav");
+  const nav = document.getElementById("sidebar-nav");
   if (!toggle || !nav) return;
   toggle.addEventListener("click", () => nav.classList.toggle("open"));
 }
@@ -33,8 +36,6 @@ function setupViewSwitcher() {
 function setupProjectFilters() {
   const filterBtns = document.querySelectorAll(".filter-proj");
   const cards = document.querySelectorAll(".project-card");
-  if (!filterBtns.length) return;
-
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const filter = btn.dataset.filter;
@@ -52,8 +53,6 @@ function setupProjectFilters() {
 function setupTaskFilters() {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const rows = document.querySelectorAll(".table-row.clickable");
-  if (!filterBtns.length) return;
-
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
       const filter = btn.dataset.filter;
@@ -130,5 +129,97 @@ function setupModalDetails() {
   closeBtn?.addEventListener("click", closeModal);
   modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
+  });
+}
+
+function setupReports() {
+  const periodBtns = document.querySelectorAll(".filter-report");
+  const focusBtns = document.querySelectorAll(".filter-focus");
+
+  const barValues = {
+    7: { A: 78, B: 64, C: 52, Ops: 85 },
+    30: { A: 70, B: 58, C: 60, Ops: 80 },
+    90: { A: 82, B: 73, C: 68, Ops: 88 },
+  };
+
+  const slaValues = {
+    7: { sla: "97%", incidentes: "1", tempo: "1.2h" },
+    30: { sla: "95%", incidentes: "3", tempo: "1.8h" },
+    90: { sla: "93%", incidentes: "6", tempo: "2.1h" },
+  };
+
+  const updateReport = (period) => {
+    const bars = document.querySelectorAll(".r-fill");
+    const vals = document.querySelectorAll(".r-val");
+    bars.forEach((bar) => {
+      const squad = bar.dataset.squad;
+      const pct = barValues[period][squad] || 0;
+      bar.style.width = `${pct}%`;
+    });
+    vals.forEach((val) => {
+      const squad = val.dataset.val;
+      val.textContent = `${barValues[period][squad] || 0}%`;
+    });
+
+    document.querySelectorAll(".sla-val").forEach((el) => {
+      const key = el.dataset.sla;
+      el.textContent = slaValues[period][key] || "-";
+    });
+  };
+
+  periodBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      periodBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const period = btn.dataset.period;
+      updateReport(period);
+    });
+  });
+
+  focusBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      focusBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
+  updateReport("7");
+}
+
+function setupExports() {
+  const buttons = document.querySelectorAll(".export-btn");
+  const msg = document.getElementById("export-msg");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const type = btn.dataset.type;
+      if (msg) {
+        msg.textContent = `Exportação simulada (${type.toUpperCase()}). Como este é um protótipo, nenhum arquivo real é gerado.`;
+      }
+    });
+  });
+}
+
+function setupConfig() {
+  const saveBtn = document.getElementById("btn-save-cfg");
+  const cfgMsg = document.getElementById("cfg-msg");
+  const themeBtns = document.querySelectorAll(".theme-btn");
+
+  saveBtn?.addEventListener("click", () => {
+    if (cfgMsg) {
+      cfgMsg.textContent = "Configurações salvas visualmente. Nenhum dado foi gravado de verdade.";
+    }
+  });
+
+  themeBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const theme = btn.dataset.theme;
+      themeBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      if (theme === "dark") {
+        document.body.classList.add("theme-dark");
+      } else {
+        document.body.classList.remove("theme-dark");
+      }
+    });
   });
 }
