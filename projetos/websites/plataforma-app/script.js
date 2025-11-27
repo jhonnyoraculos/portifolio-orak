@@ -15,6 +15,7 @@ function setupModal() {
   const closeBtn = document.getElementById("close-modal");
   const form = document.getElementById("login-form");
   const msg = document.getElementById("login-msg");
+  const loggedArea = document.getElementById("area-logada");
 
   if (!openBtn || !modal || !closeBtn || !form || !msg) return;
 
@@ -38,7 +39,25 @@ function setupModal() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    msg.textContent = "Login simulado com sucesso. Esta é apenas uma demonstração visual.";
+    const email = form.querySelector("input[type='email']");
+    const password = form.querySelector("input[type='password']");
+    const emailVal = email?.value.trim();
+    const passVal = password?.value.trim();
+
+    if (!emailVal || !passVal) {
+      msg.textContent = "Preencha e-mail e senha para continuar (simulado).";
+      msg.style.color = "#b91c1c";
+      return;
+    }
+
+    msg.textContent = "";
+    modal.classList.remove("open");
+    form.reset();
+    document.body.classList.add("logged-in");
+
+    if (loggedArea) {
+      loggedArea.scrollIntoView({ behavior: "smooth" });
+    }
   });
 }
 
