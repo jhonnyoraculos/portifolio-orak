@@ -457,6 +457,8 @@ function renderGraficoEmpilhadoDespesas(dados) {
   dados.forEach((d) => {
     const col = document.createElement("div");
     col.className = "stacked-col";
+    const barsWrap = document.createElement("div");
+    barsWrap.className = "stacked-col-bars";
     const varPart = document.createElement("div");
     varPart.className = "stacked-part";
     varPart.style.background = "linear-gradient(180deg, rgba(255,123,123,0.8), rgba(255,123,123,0.5))";
@@ -472,12 +474,8 @@ function renderGraficoEmpilhadoDespesas(dados) {
     const label = document.createElement("div");
     label.className = "stacked-label";
     label.textContent = d.mes;
-    const bars = document.createElement("div");
-    bars.style.display = "flex";
-    bars.style.flexDirection = "column-reverse";
-    bars.style.gap = "2px";
-    bars.append(varPart, fixPart);
-    col.append(bars, label);
+    barsWrap.append(varPart, fixPart);
+    col.append(barsWrap, label);
     container.appendChild(col);
   });
 }

@@ -459,6 +459,14 @@ body {
   min-height: 220px;
 }
 
+.stacked-col-bars {
+  height: 180px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
+  width: 100%;
+}
+
 .chart-animate-in {
   opacity: 0;
   transform: translateY(12px);
