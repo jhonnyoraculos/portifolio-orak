@@ -596,11 +596,13 @@ function renderMetasRadiais(dados) {
     svg.setAttribute("viewBox", "0 0 120 120");
     const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
     const grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
-    const gradId = `grad-${d.nome.replace(/\\s+/g, "")}`;
+    const gradId = `grad-${d.nome.replace(/\s+/g, "")}`;
     grad.setAttribute("id", gradId);
     grad.setAttribute("x1", "0%");
+    grad.setAttribute("y1", "0%");
     grad.setAttribute("x2", "100%");
-    grad.innerHTML = `<stop offset="0%" stop-color="var(--gold)"/><stop offset="100%" stop-color="var(--green)"/>`;
+    grad.setAttribute("y2", "0%");
+    grad.innerHTML = `<stop offset="0%" stop-color="#f4c76b"/><stop offset="100%" stop-color="#5ce1a9"/>`;
     defs.appendChild(grad);
     svg.appendChild(defs);
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
@@ -621,6 +623,7 @@ function renderMetasRadiais(dados) {
     const len = 2 * Math.PI * 52;
     fg.setAttribute("stroke-dasharray", `${len} ${len}`);
     fg.setAttribute("stroke-dashoffset", `${len}`);
+    fg.style.transition = "stroke-dashoffset 0.8s ease";
     svg.append(circle, fg);
     wrap.appendChild(svg);
     const label = document.createElement("p");
@@ -629,7 +632,6 @@ function renderMetasRadiais(dados) {
     container.appendChild(wrap);
     requestAnimationFrame(() => {
       fg.style.strokeDashoffset = `${len * (1 - d.percentual / 100)}`;
-      fg.style.stroke = "linear-gradient(120deg, var(--gold), var(--green))";
     });
   });
 }
