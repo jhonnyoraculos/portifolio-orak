@@ -72,9 +72,9 @@ a {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 20% 20%, rgba(76, 107, 255, 0.12), transparent 35%),
-    radial-gradient(circle at 80% 10%, rgba(62, 200, 255, 0.1), transparent 30%),
-    radial-gradient(circle at 60% 60%, rgba(140, 107, 255, 0.1), transparent 32%);
+    radial-gradient(circle at 20% 20%, rgba(76, 107, 255, 0.08), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(62, 200, 255, 0.08), transparent 30%),
+    radial-gradient(circle at 60% 60%, rgba(140, 107, 255, 0.08), transparent 32%);
   z-index: 0;
 }
 
@@ -159,6 +159,7 @@ a {
   border: 1px solid transparent;
   background: var(--sidebar-item);
   padding: 10px 12px;
+  min-height: 44px;
   border-radius: 16px;
   font-weight: 600;
   color: var(--sidebar-text);
@@ -309,6 +310,9 @@ a {
 .page {
   flex: 1;
   padding: 28px 20px 70px;
+  max-width: 1180px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .intro {
@@ -329,6 +333,7 @@ a {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
+  margin-bottom: 12px;
 }
 
 .card {
@@ -361,6 +366,7 @@ a {
   background: var(--card);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
+  color: var(--text);
 }
 
 .workload-head {
@@ -471,7 +477,7 @@ a {
   gap: 10px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--border);
 }
 
@@ -609,6 +615,10 @@ a {
   display: grid;
   gap: 10px;
   color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
 }
 
 .report-head h3 {
