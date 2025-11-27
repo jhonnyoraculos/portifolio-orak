@@ -15,7 +15,6 @@ function setupModal() {
   const closeBtn = document.getElementById("close-modal");
   const form = document.getElementById("login-form");
   const msg = document.getElementById("login-msg");
-  const loggedArea = document.getElementById("area-logada");
 
   if (!openBtn || !modal || !closeBtn || !form || !msg) return;
 
@@ -53,11 +52,8 @@ function setupModal() {
     msg.textContent = "";
     modal.classList.remove("open");
     form.reset();
-    document.body.classList.add("logged-in");
-
-    if (loggedArea) {
-      loggedArea.scrollIntoView({ behavior: "smooth" });
-    }
+    // Redireciona para o painel fictício
+    window.location.href = "dashboard.html";
   });
 }
 
