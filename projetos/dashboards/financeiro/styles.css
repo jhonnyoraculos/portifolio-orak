@@ -452,6 +452,12 @@ body {
   min-height: 220px;
 }
 
+.chart-stacked {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
 .chart-animate-in {
   opacity: 0;
   transform: translateY(12px);
@@ -493,10 +499,10 @@ body {
 
 .stacked-col {
   width: 36px;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  gap: 2px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  gap: 4px;
 }
 
 .stacked-part {

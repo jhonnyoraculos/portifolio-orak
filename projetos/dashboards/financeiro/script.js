@@ -454,18 +454,16 @@ function renderGraficoEmpilhadoDespesas(dados) {
   if (!container) return;
   container.innerHTML = "";
   const max = Math.max(...dados.map((d) => d.fixas + d.variaveis));
-  const row = document.createElement("div");
-  row.className = "stacked-row";
   dados.forEach((d) => {
     const col = document.createElement("div");
     col.className = "stacked-col";
     const varPart = document.createElement("div");
     varPart.className = "stacked-part";
-    varPart.style.background = "linear-gradient(180deg, rgba(255,123,123,0.7), rgba(255,123,123,0.4))";
+    varPart.style.background = "linear-gradient(180deg, rgba(255,123,123,0.8), rgba(255,123,123,0.5))";
     varPart.style.height = "0%";
     const fixPart = document.createElement("div");
     fixPart.className = "stacked-part";
-    fixPart.style.background = "linear-gradient(180deg, rgba(244,199,107,0.7), rgba(244,199,107,0.4))";
+    fixPart.style.background = "linear-gradient(180deg, rgba(244,199,107,0.8), rgba(244,199,107,0.5))";
     fixPart.style.height = "0%";
     requestAnimationFrame(() => {
       varPart.style.height = `${(d.variaveis / max) * 100}%`;
@@ -474,10 +472,14 @@ function renderGraficoEmpilhadoDespesas(dados) {
     const label = document.createElement("div");
     label.className = "stacked-label";
     label.textContent = d.mes;
-    col.append(varPart, fixPart, label);
-    row.appendChild(col);
+    const bars = document.createElement("div");
+    bars.style.display = "flex";
+    bars.style.flexDirection = "column-reverse";
+    bars.style.gap = "2px";
+    bars.append(varPart, fixPart);
+    col.append(bars, label);
+    container.appendChild(col);
   });
-  container.appendChild(row);
 }
 
 function renderGraficoPizzaDespesas(dados) {
@@ -592,6 +594,15 @@ function renderMetasRadiais(dados) {
     wrap.className = "radial";
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("viewBox", "0 0 120 120");
+    const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+    const grad = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    const gradId = `grad-${d.nome.replace(/\\s+/g, "")}`;
+    grad.setAttribute("id", gradId);
+    grad.setAttribute("x1", "0%");
+    grad.setAttribute("x2", "100%");
+    grad.innerHTML = `<stop offset="0%" stop-color="var(--gold)"/><stop offset="100%" stop-color="var(--green)"/>`;
+    defs.appendChild(grad);
+    svg.appendChild(defs);
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("cx", "60");
     circle.setAttribute("cy", "60");
@@ -604,7 +615,7 @@ function renderMetasRadiais(dados) {
     fg.setAttribute("cy", "60");
     fg.setAttribute("r", "52");
     fg.setAttribute("fill", "transparent");
-    fg.setAttribute("stroke", "url(#grad)");
+    fg.setAttribute("stroke", `url(#${gradId})`);
     fg.setAttribute("stroke-width", "10");
     fg.setAttribute("stroke-linecap", "round");
     const len = 2 * Math.PI * 52;
