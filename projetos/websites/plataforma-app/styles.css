@@ -58,7 +58,7 @@ h3 {
   position: fixed;
   top: 12px;
   left: 12px;
-  padding: 10px 14px;
+  padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.9);
@@ -66,9 +66,13 @@ h3 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   z-index: 30;
   transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
 .back-portfolio:hover {
