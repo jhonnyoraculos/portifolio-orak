@@ -1,5 +1,5 @@
 // Dashboard Orbita - protótipo front-end
-// Controla navegação, filtros, ciclo de status, modal de detalhes, relatórios e tema.
+// Navegação, filtros, status, modal, relatórios, export e tema.
 
 document.addEventListener("DOMContentLoaded", () => {
   setupSidebar();
@@ -11,7 +11,18 @@ document.addEventListener("DOMContentLoaded", () => {
   setupReports();
   setupExports();
   setupConfig();
+  ensureDefaultView();
 });
+
+function ensureDefaultView() {
+  // Garante que apenas a primeira view fique ativa ao carregar
+  const links = document.querySelectorAll(".nav-link");
+  const views = document.querySelectorAll(".view");
+  if (links.length && views.length) {
+    links.forEach((l, idx) => l.classList.toggle("active", idx === 0));
+    views.forEach((v, idx) => v.classList.toggle("view--active", idx === 0));
+  }
+}
 
 function setupSidebar() {
   const toggle = document.getElementById("menu-toggle");
@@ -43,8 +54,7 @@ function setupProjectFilters() {
       btn.classList.add("active");
       cards.forEach((card) => {
         const status = card.dataset.status;
-        const shouldShow = filter === "all" || status === filter;
-        card.style.display = shouldShow ? "grid" : "none";
+        card.style.display = filter === "all" || status === filter ? "grid" : "none";
       });
     });
   });
@@ -60,8 +70,7 @@ function setupTaskFilters() {
       btn.classList.add("active");
       rows.forEach((row) => {
         const status = row.dataset.status;
-        const show = filter === "all" || status === filter;
-        row.style.display = show ? "grid" : "none";
+        row.style.display = filter === "all" || status === filter ? "grid" : "none";
       });
     });
   });
@@ -149,18 +158,15 @@ function setupReports() {
   };
 
   const updateReport = (period) => {
-    const bars = document.querySelectorAll(".r-fill");
-    const vals = document.querySelectorAll(".r-val");
-    bars.forEach((bar) => {
+    document.querySelectorAll(".r-fill").forEach((bar) => {
       const squad = bar.dataset.squad;
       const pct = barValues[period][squad] || 0;
       bar.style.width = `${pct}%`;
     });
-    vals.forEach((val) => {
+    document.querySelectorAll(".r-val").forEach((val) => {
       const squad = val.dataset.val;
       val.textContent = `${barValues[period][squad] || 0}%`;
     });
-
     document.querySelectorAll(".sla-val").forEach((el) => {
       const key = el.dataset.sla;
       el.textContent = slaValues[period][key] || "-";

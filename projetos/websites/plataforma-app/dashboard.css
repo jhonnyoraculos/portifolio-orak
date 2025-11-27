@@ -71,7 +71,7 @@ a {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 210px 1fr;
   min-height: 100vh;
 }
 
@@ -80,8 +80,8 @@ a {
   top: 0;
   align-self: start;
   height: 100vh;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.82);
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: blur(16px);
   border-right: 1px solid var(--border);
   box-shadow: 10px 0 30px -28px rgba(0, 0, 0, 0.35);
@@ -91,7 +91,7 @@ a {
 }
 
 .theme-dark .sidebar {
-  background: rgba(20, 28, 50, 0.9);
+  background: rgba(20, 28, 50, 0.85);
 }
 
 .sidebar-header {
@@ -144,9 +144,9 @@ a {
 .nav-link {
   text-align: left;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.6);
-  padding: 9px 12px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 9px 10px;
+  border-radius: 14px;
   font-weight: 600;
   color: var(--muted);
   cursor: pointer;
@@ -180,11 +180,11 @@ a {
 .nav-link.active::before {
   content: "";
   position: absolute;
-  left: -6px;
+  left: -8px;
   top: 8px;
   bottom: 8px;
-  width: 3px;
-  border-radius: 3px;
+  width: 4px;
+  border-radius: 4px;
   background: linear-gradient(180deg, var(--accent), var(--accent-3));
 }
 
@@ -757,6 +757,14 @@ a {
 .theme-btn.active {
   background: linear-gradient(120deg, rgba(75, 107, 255, 0.2), rgba(62, 200, 255, 0.2));
   border-color: rgba(75, 107, 255, 0.5);
+}
+
+.view {
+  display: none;
+}
+
+.view.view--active {
+  display: block;
 }
 
 .muted {
