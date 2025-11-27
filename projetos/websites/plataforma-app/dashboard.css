@@ -158,8 +158,8 @@ a {
   text-align: left;
   border: 1px solid transparent;
   background: var(--sidebar-item);
-  padding: 9px 10px;
-  border-radius: 14px;
+  padding: 10px 12px;
+  border-radius: 16px;
   font-weight: 600;
   color: var(--sidebar-text);
   cursor: pointer;
@@ -188,7 +188,7 @@ a {
   background: var(--sidebar-active);
   color: var(--text);
   border-color: rgba(75, 107, 255, 0.45);
-  box-shadow: 0 10px 26px -20px rgba(75, 107, 255, 0.5);
+  box-shadow: 0 12px 30px -24px rgba(75, 107, 255, 0.5);
 }
 
 .nav-link.active::before {
@@ -338,6 +338,7 @@ a {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
+  color: var(--text);
 }
 
 .card.wide {
@@ -407,11 +408,12 @@ a {
 .table-section {
   margin-top: 22px;
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--card);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   padding: 16px 18px;
   backdrop-filter: blur(10px);
+  color: var(--text);
 }
 
 .table-header {
@@ -469,14 +471,14 @@ a {
   gap: 10px;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--border);
 }
 
 .table-row.head {
   background: transparent;
   font-weight: 700;
-  color: var(--muted);
+  color: var(--text);
 }
 
 .clickable {
@@ -585,7 +587,7 @@ a {
   margin-top: 16px;
   padding: 16px 18px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--card);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
@@ -606,6 +608,7 @@ a {
 .report-card {
   display: grid;
   gap: 10px;
+  color: var(--text);
 }
 
 .report-head h3 {
@@ -672,7 +675,7 @@ a {
 .sla-item {
   padding: 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
   border: 1px solid var(--border);
 }
 
@@ -709,7 +712,7 @@ a {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   color: var(--text);
 }
 
@@ -783,6 +786,10 @@ a {
 
 .muted {
   color: var(--muted);
+}
+
+.content-wrap {
+  display: block;
 }
 
 .footer {
