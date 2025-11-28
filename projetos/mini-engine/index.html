@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini Game / Engine · ORΔK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">ORΔK Play</div>
+    <nav class="nav">
+      <a href="#prototype">Protótipo</a>
+      <a href="#mecanicas">Mecânicas</a>
+      <a href="#interface">Interface</a>
+      <a href="#notas">Notas Técnicas</a>
+    </nav>
+    <a class="back" href="../..">← Portfólio</a>
+  </header>
+
+  <main>
+    <section class="hero" id="topo">
+      <div class="hero-text">
+        <p class="eyebrow">ORΔK · Mini Engine</p>
+        <h1>Mini Game / Engine</h1>
+        <p class="subtitle">Prototipagem rápida de mecânicas, UI imersiva e experiências lúdicas.</p>
+        <p class="lede">
+          Protótipo de engine/jogo focado em testar mecânicas e interfaces de forma ágil. Não é um jogo completo,
+          mas uma base para experimentar “game feel” e HUDs.
+        </p>
+        <a class="btn" href="#prototype">Jogar Protótipo</a>
+      </div>
+      <div class="hero-panel">
+        <div class="panel-glow"></div>
+        <p class="panel-title">Painel Futurista</p>
+        <div class="panel-bars">
+          <span class="bar b1"></span>
+          <span class="bar b2"></span>
+          <span class="bar b3"></span>
+          <span class="bar b4"></span>
+        </div>
+        <p class="panel-foot">HUD · Partículas · Cenários</p>
+      </div>
+    </section>
+
+    <section class="section prototype" id="prototype">
+      <div class="section-head">
+        <p class="eyebrow">Protótipo jogável</p>
+        <h2>Área de Teste</h2>
+        <p>Use WASD ou setas para mover. Colete orbes, desvie dos obstáculos e altere parâmetros em tempo real.</p>
+      </div>
+      <div class="prototype-grid">
+        <article class="card play-card">
+          <div class="card-head">
+            <h3>Área de Teste</h3>
+            <p class="muted">WASD/setas · Partículas · Trilhas</p>
+          </div>
+          <div class="hud">
+            <span id="hud-score">Pontuação: 0</span>
+            <span id="hud-speed">Velocidade: 1.0x</span>
+            <span id="hud-status">Status: pronto</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="gameCanvas" width="720" height="420"></canvas>
+          </div>
+        </article>
+
+        <article class="card controls-card">
+          <div class="card-head">
+            <h3>Parâmetros da Engine</h3>
+            <p class="muted">Ajuste o game feel em tempo real.</p>
+          </div>
+          <label class="field">
+            <span>Velocidade do player</span>
+            <input id="speedControl" type="range" min="0.5" max="1.5" step="0.25" value="1">
+            <span class="chip" id="speedLabel">1.0x</span>
+          </label>
+
+          <label class="field check">
+            <input id="particlesToggle" type="checkbox" checked>
+            <span>Partículas</span>
+          </label>
+
+          <label class="field check">
+            <input id="ghostToggle" type="checkbox">
+            <span>Trajetória fantasma</span>
+          </label>
+
+          <label class="field">
+            <span>Cenário</span>
+            <select id="sceneSelect">
+              <option value="neon">Neon</option>
+              <option value="noite">Noite</option>
+              <option value="grass">Synthetic Grass</option>
+            </select>
+          </label>
+
+          <p class="state" id="stateLabel">Velocidade: 1.0x · Partículas: ON · Cenário: Neon</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="mecanicas">
+      <div class="section-head">
+        <p class="eyebrow">Features</p>
+        <h2>Mecânicas em teste</h2>
+        <p>Conjunto mínimo para validar movimento, colisão, coleta e ajustes dinâmicos.</p>
+      </div>
+      <div class="grid cards">
+        <article class="card feature">
+          <div class="icon orb"></div>
+          <h3>Movimento</h3>
+          <p>Input WASD/setas com delta time e ajustes de velocidade em tempo real.</p>
+        </article>
+        <article class="card feature">
+          <div class="icon shield"></div>
+          <h3>Colisão</h3>
+          <p>Detecção simples com feedback visual quando o player toca um obstáculo.</p>
+        </article>
+        <article class="card feature">
+          <div class="icon spark"></div>
+          <h3>Coleta</h3>
+          <p>Orbes somam pontuação e aplicam animação de fade/escala ao serem coletados.</p>
+        </article>
+        <article class="card feature">
+          <div class="icon sliders"></div>
+          <h3>Parâmetros</h3>
+          <p>UI conecta direto ao gameplay: velocidade, partículas, trilha e cenários.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split" id="interface">
+      <div>
+        <p class="eyebrow">HUD</p>
+        <h2>Interface &amp; HUD</h2>
+        <p>Simulação de painel de debug: leitura clara do estado, feedback imediato em cores,
+          badges e barras. Útil para iterar game feel e sinalizar colisões.</p>
+        <p>Objetivo: tornar o protótipo visualmente legível e alinhado ao tema ORΔK (dourado + noir futurista).</p>
+      </div>
+      <div class="hud-mock card">
+        <div class="hud-line">
+          <span class="tag ok">OK</span>
+          <div class="bar-wrap"><span class="bar-fill w70"></span></div>
+          <span class="meta">FPS 60</span>
+        </div>
+        <div class="hud-line">
+          <span class="tag warn">PWR</span>
+          <div class="bar-wrap"><span class="bar-fill w50 warn"></span></div>
+          <span class="meta">TEMP 42°</span>
+        </div>
+        <div class="hud-line">
+          <span class="tag info">DBG</span>
+          <div class="bar-wrap"><span class="bar-fill w85 info"></span></div>
+          <span class="meta">TRACE ON</span>
+        </div>
+        <div class="hud-grid">
+          <span class="chip">COLLISION: READY</span>
+          <span class="chip">PARTICLES: ACTIVE</span>
+          <span class="chip">PATH: GHOST OFF</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="notas">
+      <div class="section-head">
+        <p class="eyebrow">Tech</p>
+        <h2>Notas Técnicas</h2>
+      </div>
+      <ul class="bullets">
+        <li>Protótipo desenvolvido em HTML, CSS e JavaScript puro.</li>
+        <li>Base pronta para expandir em jogos 2D simples.</li>
+        <li>Controles da engine conectados diretamente às variáveis do gameplay.</li>
+        <li>Focado em iteração rápida de ideias (game feel, UI, HUD).</li>
+      </ul>
+      <p class="note">Este protótipo existe apenas para portfólio. Nenhum dado é salvo. Código e mecânicas podem ser adaptados para projetos reais.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>ORΔK · Mini Game / Engine – Protótipo para portfólio.</p>
+    <a href="../..">Voltar ao portfólio</a>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+</html>
